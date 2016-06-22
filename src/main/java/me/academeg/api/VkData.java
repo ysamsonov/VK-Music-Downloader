@@ -44,4 +44,10 @@ public class VkData {
         Matcher matcher = p.matcher(url);
         return matcher.find() ? matcher.group(2) : null;
     }
+
+    public static String parseUserId(String url) {
+        Pattern p = Pattern.compile("(user_id=)(\\w*)");
+        Matcher matcher = p.matcher(url);
+        return matcher.find() ? matcher.group(2) : null;
+    }
 }

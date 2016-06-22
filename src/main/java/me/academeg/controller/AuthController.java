@@ -22,9 +22,12 @@ public class AuthController {
         engine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == Worker.State.SUCCEEDED) {
                 String accessToken = VkData.parseAccessToken(engine.getLocation());
-                if (accessToken != null) {
+                String userId = VkData.parseUserId(engine.getLocation());
+                if (accessToken != null && userId != null) {
                     vkData.setAccessToken(accessToken);
+                    vkData.setUserId(userId);
                     System.out.println(vkData.getAccessToken());
+                    System.out.println(vkData.getUserId());
                     System.out.println("OK");
                 }
             }

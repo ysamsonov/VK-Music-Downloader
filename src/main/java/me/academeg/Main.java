@@ -14,7 +14,7 @@ public class Main extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/layouts/main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/layouts/auth.fxml"));
         primaryStage.setTitle("VK-Music Downloader");
         primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().add(new Image(getClass().getResource("/icon.png").toString()));

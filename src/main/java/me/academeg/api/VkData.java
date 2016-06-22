@@ -40,7 +40,7 @@ public class VkData {
     }
 
     public static String parseAccessToken(String url) {
-        Pattern p = Pattern.compile("(#access_token=).(\\w*)&");
+        Pattern p = Pattern.compile("(#access_token=)(\\w*)&");
         Matcher matcher = p.matcher(url);
         return matcher.find() ? matcher.group(2) : null;
     }

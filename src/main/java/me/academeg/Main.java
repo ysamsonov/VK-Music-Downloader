@@ -8,6 +8,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import me.academeg.api.VkData;
 import me.academeg.controller.AuthController;
+import me.academeg.controller.MusicController;
+import me.academeg.utils.SettingsSaver;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -18,9 +22,34 @@ public class Main extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
+        if (SettingsSaver.isFileExist()) {
+            try {
+                vkData = SettingsSaver.readSettings();
+                openMusicController(primaryStage);
+                return;
+            } catch (IOException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        }
         vkData = new VkData();
+        openAuthController(primaryStage);
+    }
+
+    private void openAuthController(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/auth.fxml"));
         AuthController controller = new AuthController();
+        controller.setVk(vkData);
+        loader.setController(controller);
+        Parent load = loader.load();
+        primaryStage.setTitle("VK-Music Downloader");
+        primaryStage.setScene(new Scene(load));
+        primaryStage.getIcons().add(new Image(getClass().getResource("/icon.png").toString()));
+        primaryStage.show();
+    }
+
+    private void openMusicController(Stage primaryStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/music.fxml"));
+        MusicController controller = new MusicController();
         controller.setVk(vkData);
         loader.setController(controller);
         Parent load = loader.load();

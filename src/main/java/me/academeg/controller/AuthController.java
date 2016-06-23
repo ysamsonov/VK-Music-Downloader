@@ -10,6 +10,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import me.academeg.api.VkData;
+import me.academeg.utils.SettingsSaver;
 
 import java.io.IOException;
 
@@ -35,6 +36,7 @@ public class AuthController {
                     System.out.println(vkData.getAccessToken());
                     System.out.println(vkData.getUserId());
                     System.out.println("OK");
+                    SettingsSaver.writeSettings(vkData);
                     openMusic();
                 }
             }

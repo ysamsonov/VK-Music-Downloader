@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 public class AudioDao {
 
-    private String url;
-
     private String accessToken;
 
     public AudioDao(String accessToken) {

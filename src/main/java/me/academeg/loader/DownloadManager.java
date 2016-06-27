@@ -12,15 +12,11 @@ import java.util.List;
 public class DownloadManager implements Runnable {
 
     private List<Audio> dataSet;
+    private String path;
     private OnProgressListener progressListener;
 
     public DownloadManager(List<Audio> dataSet) {
         this.dataSet = dataSet;
-    }
-
-    public DownloadManager(List<Audio> dataSet, OnProgressListener progressListener) {
-        this.dataSet = dataSet;
-        this.progressListener = progressListener;
     }
 
     @Override
@@ -33,8 +29,9 @@ public class DownloadManager implements Runnable {
             }
 
             String filename = String.format("%s - %s.mp3", audio.getArtist(), audio.getTitle());
+            String pathForDownload = path != null ? String.format("%s/%s", path, filename) : filename;
             try {
-                downloadFile(filename, audio.getUrl());
+                downloadFile(pathForDownload, audio.getUrl());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -47,6 +44,10 @@ public class DownloadManager implements Runnable {
 
     public void setProgressListener(OnProgressListener progressListener) {
         this.progressListener = progressListener;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     private void downloadFile(String filename, String urlStr) throws IOException {

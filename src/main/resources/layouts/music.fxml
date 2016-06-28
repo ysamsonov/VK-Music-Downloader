@@ -6,21 +6,18 @@
 <GridPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="700.0" prefWidth="600.0"
           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
           AnchorPane.topAnchor="5.0" xmlns="http://javafx.com/javafx/8">
-    <padding>
-        <Insets top="15"/>
-    </padding>
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
 
-        <GridPane hgap="10" vgap="5">
+        <GridPane hgap="10" vgap="5" GridPane.rowIndex="0">
             <padding>
-                <Insets bottom="15"/>
+                <Insets bottom="10" top="10"/>
             </padding>
             <columnConstraints>
                 <ColumnConstraints hgrow="NEVER"/>
@@ -29,13 +26,17 @@
                 <ColumnConstraints hgrow="NEVER"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER"/>
             </rowConstraints>
             <children>
-                <Button text="Выделить все" onAction="#selectAll"/>
-                <Button text="Снять выделение" onAction="#deselect" GridPane.columnIndex="1"/>
-                <Button text="Выбрать папку для загрузки" onAction="#chooseDirectory" GridPane.columnIndex="2"/>
-                <Button text="Скачать" onAction="#download" GridPane.columnIndex="3"/>
+                <Label fx:id="currentPathLabel" GridPane.columnIndex="0"/>
+                <Button text="Выбрать папку для загрузки" onAction="#chooseDirectory" GridPane.columnIndex="1"/>
+                <Button text="Скачать" onAction="#download" GridPane.columnIndex="2"/>
+                <ProgressBar fx:id="progressBar" GridPane.columnIndex="3"/>
+
+                <Button text="Выделить все" onAction="#selectAll" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Button text="Снять выделение" onAction="#deselect" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
             </children>
         </GridPane>
 

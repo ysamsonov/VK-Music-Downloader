@@ -2,7 +2,9 @@ package me.academeg.controller;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.stage.DirectoryChooser;
 import me.academeg.api.VkData;
@@ -25,6 +27,11 @@ public class MusicController {
     private ListView<AudioListItem> listView;
 
     @FXML
+    private ProgressBar progressBar;
+
+    @FXML private Label currentPathLabel;
+
+    @FXML
     private void initialize() {
         AudioDao audioDao = new AudioDao(vkData.getAccessToken());
         try {
@@ -37,6 +44,8 @@ public class MusicController {
             e.printStackTrace();
         }
         path = System.getProperty("user.home");
+        currentPathLabel.setText(path);
+        progressBar.setProgress(0);
     }
 
     public void download() {
@@ -48,7 +57,10 @@ public class MusicController {
             }
         }
         DownloadManager downloadManager = new DownloadManager(audios);
-        downloadManager.setProgressListener(val -> System.out.printf("Progress: %s%n", Float.toString(val * 100)));
+        downloadManager.setProgressListener(val -> {
+            System.out.printf("Progress: %s%n", Float.toString(val * 100));
+            progressBar.setProgress(val);
+        });
         downloadManager.setPath(path);
         Thread thread = new Thread(downloadManager);
         thread.start();
@@ -60,7 +72,12 @@ public class MusicController {
         File file = directoryChooser.showDialog(listView.getScene().getWindow());
         if (file != null) {
             path = file.getAbsolutePath();
+            currentPathLabel.setText(path);
         }
+    }
+
+    public void manPB() {
+        progressBar.progressProperty().setValue(0.50);
     }
 
     public void selectAll() {

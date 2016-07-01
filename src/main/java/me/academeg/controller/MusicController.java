@@ -1,6 +1,7 @@
 package me.academeg.controller;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -29,7 +30,8 @@ public class MusicController {
     @FXML
     private ProgressBar progressBar;
 
-    @FXML private Label currentPathLabel;
+    @FXML
+    private Label currentPathLabel;
 
     @FXML
     private void initialize() {
@@ -48,7 +50,8 @@ public class MusicController {
         progressBar.setProgress(0);
     }
 
-    public void download() {
+    @FXML
+    public void download(ActionEvent event) {
         ObservableList<AudioListItem> items = listView.getItems();
         LinkedList<Audio> audios = new LinkedList<>();
         for (AudioListItem item : items) {
@@ -58,7 +61,7 @@ public class MusicController {
         }
         DownloadManager downloadManager = new DownloadManager(audios);
         downloadManager.setProgressListener(val -> {
-            System.out.printf("Progress: %s%n", Float.toString(val * 100));
+//            System.out.printf("Progress: %s%n", Float.toString(val * 100));
             progressBar.setProgress(val);
         });
         downloadManager.setPath(path);
@@ -66,7 +69,8 @@ public class MusicController {
         thread.start();
     }
 
-    public void chooseDirectory() {
+    @FXML
+    public void chooseDirectory(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setInitialDirectory(new File(path));
         File file = directoryChooser.showDialog(listView.getScene().getWindow());
@@ -76,15 +80,13 @@ public class MusicController {
         }
     }
 
-    public void manPB() {
-        progressBar.progressProperty().setValue(0.50);
-    }
-
-    public void selectAll() {
+    @FXML
+    public void selectAll(ActionEvent event) {
         listView.getItems().forEach(audioListItem -> audioListItem.downloadProperty().set(true));
     }
 
-    public void deselect() {
+    @FXML
+    public void deselect(ActionEvent event) {
         listView.getItems().forEach(audioListItem -> audioListItem.downloadProperty().set(false));
     }
 

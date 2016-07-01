@@ -8,7 +8,7 @@ public class Audio {
     private String title;
     private long duration;
     private String url;
-    private String lyricsId;
+    private long lyricsId;
 
     public Audio() {
     }
@@ -29,7 +29,7 @@ public class Audio {
         return url;
     }
 
-    public String getLyricsId() {
+    public long getLyricsId() {
         return lyricsId;
     }
 
@@ -50,7 +50,7 @@ public class Audio {
         res.title = (String) json.get("title");
         res.duration = (Long) json.get("duration");
         res.url = (String) json.get("url");
-        res.lyricsId = (String) json.get("lyrics_id");
+        res.lyricsId = (long) json.getOrDefault("lyrics_id", 0L);
         return res;
     }
 }

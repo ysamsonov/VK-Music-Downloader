@@ -6,8 +6,8 @@ import java.util.regex.Pattern;
 
 public class VkData implements Serializable {
 
+    public final static String API_VER = "5.52";
     private final static int APP_ID = 5518353;
-    private final static String API_VER = "5.52";
     private final static String REDIRECT_URL = "https://oauth.vk.com/blank.html";
     private final static int SCOPE = 8;
 

@@ -1,5 +1,6 @@
 package me.academeg.api.dao;
 
+import me.academeg.api.VkData;
 import me.academeg.api.dataSet.Audio;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -29,6 +30,7 @@ public class AudioDao {
                 .addQueryParameter("access_token", accessToken)
                 .addQueryParameter("count", String.valueOf(count))
                 .addQueryParameter("offset", String.valueOf(offset))
+                .addQueryParameter("v", VkData.API_VER)
                 .build();
 
         Request request = new Request.Builder()
@@ -41,10 +43,11 @@ public class AudioDao {
         ArrayList<Audio> audio = null;
         try {
             JSONParser parser = new JSONParser();
-            JSONArray array = (JSONArray) ((JSONObject) parser.parse(response.body().string())).get("response");
+            JSONObject jsonResponse = (JSONObject) ((JSONObject) parser.parse(response.body().string())).get("response");
+            JSONArray array = (JSONArray) jsonResponse.get("items");
             audio = new ArrayList<>(array.size());
-            for (int i = 1; i < array.size(); i++) {
-                audio.add(Audio.parse((JSONObject) array.get(i)));
+            for (Object anArray : array) {
+                audio.add(Audio.parse((JSONObject) anArray));
             }
         } catch (ParseException e) {
             e.printStackTrace();

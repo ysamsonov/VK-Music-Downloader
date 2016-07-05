@@ -7,8 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import me.academeg.api.VkData;
-import me.academeg.controller.AuthController;
-import me.academeg.controller.MusicController;
+import me.academeg.ui.controller.AuthController;
+import me.academeg.ui.controller.MusicController;
 import me.academeg.utils.SettingsSaver;
 
 import java.io.IOException;

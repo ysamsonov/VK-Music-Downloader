@@ -1,4 +1,4 @@
-package me.academeg.controller;
+package me.academeg.ui.controller;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,7 +11,7 @@ import javafx.stage.DirectoryChooser;
 import me.academeg.api.VkData;
 import me.academeg.api.dao.AudioDao;
 import me.academeg.api.dataSet.Audio;
-import me.academeg.listItem.AudioListItem;
+import me.academeg.ui.listItem.AudioListItem;
 import me.academeg.loader.DownloadManager;
 
 import java.io.File;

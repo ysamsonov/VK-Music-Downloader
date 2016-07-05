@@ -1,4 +1,4 @@
-package me.academeg.controller;
+package me.academeg.ui.controller;
 
 import javafx.concurrent.Worker;
 import javafx.fxml.FXML;

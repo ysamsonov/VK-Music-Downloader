@@ -11,8 +11,8 @@ import javafx.stage.DirectoryChooser;
 import me.academeg.api.VkData;
 import me.academeg.api.dao.AudioDao;
 import me.academeg.api.dataSet.Audio;
-import me.academeg.ui.listItem.AudioListItem;
 import me.academeg.loader.DownloadManager;
+import me.academeg.ui.listItem.AudioListItem;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,19 +35,26 @@ public class MusicController {
 
     @FXML
     private void initialize() {
-        AudioDao audioDao = new AudioDao(vkData.getAccessToken());
-        try {
-            ArrayList<Audio> audios = audioDao.get(vkData.getUserId(), 1000, 0);
-            ArrayList<AudioListItem> list = new ArrayList<>(audios.size());
-            audios.forEach((audio) -> list.add(new AudioListItem(audio)));
-            listView.getItems().addAll(list);
-            listView.setCellFactory(CheckBoxListCell.forListView(AudioListItem::downloadProperty));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         path = System.getProperty("user.home");
         currentPathLabel.setText(path);
         progressBar.setProgress(0);
+        loadAudioList();
+    }
+
+    private void loadAudioList() {
+        Thread thread = new Thread(() -> {
+            AudioDao audioDao = new AudioDao(vkData.getAccessToken());
+            try {
+                ArrayList<Audio> audios = audioDao.get(vkData.getUserId(), 6000, 0);
+                ArrayList<AudioListItem> list = new ArrayList<>(audios.size());
+                audios.forEach((audio) -> list.add(new AudioListItem(audio)));
+                listView.getItems().addAll(list);
+                listView.setCellFactory(CheckBoxListCell.forListView(AudioListItem::downloadProperty));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
     }
 
     @FXML
@@ -61,7 +68,6 @@ public class MusicController {
         }
         DownloadManager downloadManager = new DownloadManager(audios);
         downloadManager.setProgressListener(val -> {
-//            System.out.printf("Progress: %s%n", Float.toString(val * 100));
             progressBar.setProgress(val);
         });
         downloadManager.setPath(path);

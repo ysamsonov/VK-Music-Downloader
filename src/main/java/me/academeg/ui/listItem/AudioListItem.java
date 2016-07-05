@@ -1,4 +1,4 @@
-package me.academeg.listItem;
+package me.academeg.ui.listItem;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;

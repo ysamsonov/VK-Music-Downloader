@@ -1,4 +1,4 @@
-package me.academeg.controller;
+package me.academeg.ui.controller;
 
 import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
@@ -33,9 +33,6 @@ public class AuthController {
                 if (accessToken != null && userId != null) {
                     vkData.setAccessToken(accessToken);
                     vkData.setUserId(userId);
-                    System.out.println(vkData.getAccessToken());
-                    System.out.println(vkData.getUserId());
-                    System.out.println("OK");
                     SettingsSaver.writeSettings(vkData);
                     openMusic();
                 }

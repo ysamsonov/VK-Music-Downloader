@@ -40,19 +40,17 @@ public class AudioDao {
 
         Response response = client.newCall(request).execute();
 
-        ArrayList<Audio> audio = null;
+        ArrayList<Audio> audio = new ArrayList<>();
         try {
             JSONParser parser = new JSONParser();
             JSONObject jsonResponse = (JSONObject) ((JSONObject) parser.parse(response.body().string())).get("response");
             JSONArray array = (JSONArray) jsonResponse.get("items");
-            audio = new ArrayList<>(array.size());
             for (Object anArray : array) {
                 audio.add(Audio.parse((JSONObject) anArray));
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return audio;
     }
 

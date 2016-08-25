@@ -32,11 +32,13 @@
             <children>
                 <Label fx:id="currentPathLabel" GridPane.columnIndex="0"/>
                 <Button text="Выбрать папку для загрузки" onAction="#chooseDirectory" GridPane.columnIndex="1"/>
-                <Button text="Скачать" onAction="#download" GridPane.columnIndex="2"/>
+                <Button fx:id="downloadBtn" text="Скачать" onAction="#download" GridPane.columnIndex="2"/>
                 <ProgressBar fx:id="progressBar" GridPane.columnIndex="3"/>
 
                 <Button text="Выделить все" onAction="#selectAll" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
                 <Button text="Снять выделение" onAction="#deselect" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Button fx:id="cancelBtn" text="Отменить" onAction="#cancel" GridPane.rowIndex="1"
+                        GridPane.columnIndex="2"/>
             </children>
         </GridPane>
 

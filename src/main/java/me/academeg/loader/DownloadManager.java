@@ -14,6 +14,7 @@ public class DownloadManager implements Runnable {
     private List<Audio> dataSet;
     private String path;
     private OnProgressListener progressListener;
+    private OnFinishListener finishListener;
 
     public DownloadManager(List<Audio> dataSet) {
         this.dataSet = dataSet;
@@ -25,6 +26,9 @@ public class DownloadManager implements Runnable {
         int maxCount = dataSet.size();
         for (Audio audio : dataSet) {
             if (Thread.currentThread().isInterrupted()) {
+                if (finishListener != null) {
+                    finishListener.onFinish();
+                }
                 return;
             }
 
@@ -40,10 +44,17 @@ public class DownloadManager implements Runnable {
                 progressListener.update(countDownloaded / maxCount);
             }
         }
+        if (finishListener != null) {
+            finishListener.onFinish();
+        }
     }
 
     public void setProgressListener(OnProgressListener progressListener) {
         this.progressListener = progressListener;
+    }
+
+    public void setFinishListener(OnFinishListener finishListener) {
+        this.finishListener = finishListener;
     }
 
     public void setPath(String path) {
@@ -57,18 +68,19 @@ public class DownloadManager implements Runnable {
                 BufferedInputStream in = new BufferedInputStream(httpConnection.getInputStream());
                 FileOutputStream out = new FileOutputStream(filename)
         ) {
-            int saveSize = 0;
-            float fileSize = httpConnection.getContentLength();
+//            int saveSize = 0;
+//            float fileSize = httpConnection.getContentLength();
             byte buffer[] = new byte[1024];
             int count;
             while ((count = in.read(buffer, 0, 1024)) != -1) {
                 out.write(buffer, 0, count);
-                saveSize += count;
+//                saveSize += count;
             }
         }
     }
 
-    private String normalizeName(String name) {
+    @SuppressWarnings("unused")
+    protected String normalizeName(String name) {
         return name.replaceAll("[^a-zA-Z0-9.-]", "_");
     }
 }

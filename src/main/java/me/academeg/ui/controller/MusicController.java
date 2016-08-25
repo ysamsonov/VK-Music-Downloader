@@ -3,6 +3,7 @@ package me.academeg.ui.controller;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
@@ -24,20 +25,25 @@ public class MusicController {
     private VkData vkData;
     private String path;
 
+    private Thread downloadMusicThread;
+
     @FXML
     private ListView<AudioListItem> listView;
-
     @FXML
     private ProgressBar progressBar;
-
     @FXML
     private Label currentPathLabel;
+    @FXML
+    private Button downloadBtn;
+    @FXML
+    private Button cancelBtn;
 
     @FXML
     private void initialize() {
         path = System.getProperty("user.home");
         currentPathLabel.setText(path);
         progressBar.setProgress(0);
+        cancelBtn.setDisable(true);
         loadAudioList();
     }
 
@@ -67,12 +73,16 @@ public class MusicController {
             }
         }
         DownloadManager downloadManager = new DownloadManager(audios);
-        downloadManager.setProgressListener(val -> {
-            progressBar.setProgress(val);
+        downloadManager.setProgressListener(progressBar::setProgress);
+        downloadManager.setFinishListener(() -> {
+            downloadBtn.setDisable(false);
+            cancelBtn.setDisable(true);
         });
         downloadManager.setPath(path);
-        Thread thread = new Thread(downloadManager);
-        thread.start();
+        downloadBtn.setDisable(true);
+        cancelBtn.setDisable(false);
+        downloadMusicThread = new Thread(downloadManager);
+        downloadMusicThread.start();
     }
 
     @FXML
@@ -94,6 +104,12 @@ public class MusicController {
     @FXML
     public void deselect(ActionEvent event) {
         listView.getItems().forEach(audioListItem -> audioListItem.downloadProperty().set(false));
+    }
+
+    @FXML
+    public void cancel(ActionEvent event) {
+        downloadMusicThread.interrupt();
+        cancelBtn.setDisable(true);
     }
 
     public void setVk(VkData vk) {

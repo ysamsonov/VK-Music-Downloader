@@ -1,3 +1,5 @@
+package api.dataset;
+
 import me.academeg.api.dataSet.Audio;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,14 +17,13 @@ import static org.junit.Assert.assertEquals;
 public class AudioTest {
 
     private String data;
-
     private String artist;
     private String title;
     private long duration;
-    private String lyricsId;
+    private long lyricsId;
     private String url;
 
-    public AudioTest(String data, String artist, String title, long duration, String lyricsId, String url) {
+    public AudioTest(String data, String artist, String title, long duration, long lyricsId, String url) {
         this.data = data;
         this.artist = artist;
         this.title = title;
@@ -58,13 +59,13 @@ public class AudioTest {
                         "  \"duration\": 327,\n" +
                         "  \"date\": 1360439875,\n" +
                         "  \"url\": \"https://psv4.vk.m...kHQxFT_rfaSsN8B1Hv3\",\n" +
-                        "  \"lyrics_id\": \"4427560\",\n" +
+                        "  \"lyrics_id\": 4427560,\n" +
                         "  \"genre_id\": 18\n" +
                         "}",
                         "Fr&#233;d&#233;ric Fran&#231;ois Chopin",
                         "Nocturne Op. 9 №1",
                         327,
-                        "4427560",
+                        4427560,
                         "https://psv4.vk.m...kHQxFT_rfaSsN8B1Hv3"
                 },
                 {"{\n" +
@@ -80,7 +81,7 @@ public class AudioTest {
                         "Fr&#233;d&#233;ric Fran&#231;ois Chopin",
                         "Nocturne Op. 9 №1",
                         327,
-                        null,
+                        0,
                         "https://psv4.vk.m...kHQxFT_rfaSsN8B1Hv3"
                 }
         });

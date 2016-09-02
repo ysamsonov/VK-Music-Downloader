@@ -21,13 +21,13 @@ public class Main extends Application {
         launch(args);
     }
 
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws IOException {
         if (SettingsSaver.isFileExist()) {
             try {
                 vkData = SettingsSaver.readSettings();
                 openMusicController(primaryStage);
                 return;
-            } catch (IOException | ClassNotFoundException ex) {
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }

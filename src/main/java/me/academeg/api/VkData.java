@@ -1,10 +1,9 @@
 package me.academeg.api;
 
-import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class VkData implements Serializable {
+public class VkData {
 
     public final static String API_VER = "5.52";
     private final static int APP_ID = 5518353;

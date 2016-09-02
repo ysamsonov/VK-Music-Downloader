@@ -1,9 +1,9 @@
-package me.academeg.api.dao;
+package me.academeg.api.methods;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.academeg.api.VkData;
-import me.academeg.api.dataSet.Audio;
+import me.academeg.api.model.Audio;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -13,11 +13,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class AudioDao {
+public class AudioMethods {
 
     private String accessToken;
 
-    public AudioDao(String accessToken) {
+    public AudioMethods(String accessToken) {
         this.accessToken = accessToken;
     }
 

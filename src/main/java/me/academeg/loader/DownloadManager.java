@@ -1,6 +1,6 @@
 package me.academeg.loader;
 
-import me.academeg.api.dataSet.Audio;
+import me.academeg.api.model.Audio;
 
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;

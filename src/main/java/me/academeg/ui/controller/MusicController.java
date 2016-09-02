@@ -10,8 +10,8 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.stage.DirectoryChooser;
 import me.academeg.api.VkData;
-import me.academeg.api.dao.AudioDao;
-import me.academeg.api.dataSet.Audio;
+import me.academeg.api.methods.AudioMethods;
+import me.academeg.api.model.Audio;
 import me.academeg.loader.DownloadManager;
 import me.academeg.ui.listItem.AudioListItem;
 
@@ -49,9 +49,9 @@ public class MusicController {
 
     private void loadAudioList() {
         Thread thread = new Thread(() -> {
-            AudioDao audioDao = new AudioDao(vkData.getAccessToken());
+            AudioMethods audioMethods = new AudioMethods(vkData.getAccessToken());
             try {
-                ArrayList<Audio> audios = audioDao.get(vkData.getUserId(), 6000, 0);
+                ArrayList<Audio> audios = audioMethods.get(vkData.getUserId(), 6000, 0);
                 ArrayList<AudioListItem> list = new ArrayList<>(audios.size());
                 audios.forEach((audio) -> list.add(new AudioListItem(audio)));
                 listView.getItems().addAll(list);

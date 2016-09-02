@@ -1,7 +1,7 @@
 package api.dataset;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.academeg.api.dataSet.Audio;
+import me.academeg.api.model.Audio;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

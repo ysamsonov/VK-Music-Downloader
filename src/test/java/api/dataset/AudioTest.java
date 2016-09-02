@@ -1,13 +1,12 @@
 package api.dataset;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import me.academeg.api.dataSet.Audio;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -16,36 +15,61 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class AudioTest {
 
-    private String data;
+    private String json;
+    private long id;
+    private long ownerId;
     private String artist;
     private String title;
     private long duration;
-    private long lyricsId;
+    private long date;
     private String url;
+    private long lyricsId;
+    private long genreId;
 
-    public AudioTest(String data, String artist, String title, long duration, long lyricsId, String url) {
-        this.data = data;
+    public AudioTest(String json, long id, long ownerId, String artist, String title, long duration, long date,
+                     String url, long lyricsId, long genreId) {
+        this.json = json;
+        this.id = id;
+        this.ownerId = ownerId;
         this.artist = artist;
         this.title = title;
         this.duration = duration;
-        this.lyricsId = lyricsId;
+        this.date = date;
         this.url = url;
+        this.lyricsId = lyricsId;
+        this.genreId = genreId;
     }
 
     @Test
     public void parseTest() {
+        ObjectMapper mapper = new ObjectMapper();
         try {
-            JSONParser parser = new JSONParser();
-            JSONObject object = (JSONObject) parser.parse(data);
-            Audio audio = Audio.parse(object);
+            Audio audio = mapper.readValue(json, Audio.class);
+            assertEquals(audio.getId(), id);
+            assertEquals(audio.getOwnerId(), ownerId);
             assertEquals(audio.getArtist(), artist);
             assertEquals(audio.getTitle(), title);
             assertEquals(audio.getDuration(), duration);
-            assertEquals(audio.getLyricsId(), lyricsId);
+            assertEquals(audio.getDate(), date);
             assertEquals(audio.getUrl(), url);
-        } catch (ParseException e) {
+            assertEquals(audio.getLyricsId(), lyricsId);
+            assertEquals(audio.getGenreId(), genreId);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
+//        try {
+//            JSONParser parser = new JSONParser();
+//            JSONObject object = (JSONObject) parser.parse(json);
+//            Audio audio = Audio.parse(object);
+//            assertEquals(audio.getArtist(), artist);
+//            assertEquals(audio.getTitle(), title);
+//            assertEquals(audio.getDuration(), duration);
+//            assertEquals(audio.getLyricsId(), lyricsId);
+//            assertEquals(audio.getUrl(), url);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Parameterized.Parameters
@@ -62,11 +86,15 @@ public class AudioTest {
                         "  \"lyrics_id\": 4427560,\n" +
                         "  \"genre_id\": 18\n" +
                         "}",
+                        189157344,
+                        -37273781,
                         "Fr&#233;d&#233;ric Fran&#231;ois Chopin",
                         "Nocturne Op. 9 №1",
                         327,
+                        1360439875,
+                        "https://psv4.vk.m...kHQxFT_rfaSsN8B1Hv3",
                         4427560,
-                        "https://psv4.vk.m...kHQxFT_rfaSsN8B1Hv3"
+                        18
                 },
                 {"{\n" +
                         "  \"id\": 189157344,\n" +
@@ -78,11 +106,15 @@ public class AudioTest {
                         "  \"url\": \"https://psv4.vk.m...kHQxFT_rfaSsN8B1Hv3\",\n" +
                         "  \"genre_id\": 18\n" +
                         "}",
+                        189157344,
+                        -37273781,
                         "Fr&#233;d&#233;ric Fran&#231;ois Chopin",
                         "Nocturne Op. 9 №1",
                         327,
+                        1360439875,
+                        "https://psv4.vk.m...kHQxFT_rfaSsN8B1Hv3",
                         0,
-                        "https://psv4.vk.m...kHQxFT_rfaSsN8B1Hv3"
+                        18
                 }
         });
     }

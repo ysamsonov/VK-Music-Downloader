@@ -1,16 +1,35 @@
 package me.academeg.api.dataSet;
 
-import org.json.simple.JSONObject;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@SuppressWarnings("unused")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Audio {
 
-    private String artist;
-    private String title;
+    private long id;
+    @JsonProperty(value = "owner_id")
+    private long ownerId;
+    @JsonProperty(value = "artist", defaultValue = "123", required = true)
+    private String artist = "";
+    private String title = "";
     private long duration;
+    private long date;
     private String url;
+    @JsonProperty(value = "lyrics_id")
     private long lyricsId;
+    @JsonProperty(value = "genre_id")
+    private long genreId;
 
     public Audio() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public long getOwnerId() {
+        return ownerId;
     }
 
     public String getArtist() {
@@ -25,6 +44,10 @@ public class Audio {
         return duration;
     }
 
+    public long getDate() {
+        return date;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -33,25 +56,22 @@ public class Audio {
         return lyricsId;
     }
 
+    public long getGenreId() {
+        return genreId;
+    }
+
     @Override
     public String toString() {
         return "Audio{" +
-                "artist='" + artist + '\'' +
+                "id=" + id +
+                ", ownerId=" + ownerId +
+                ", artist='" + artist + '\'' +
                 ", title='" + title + '\'' +
                 ", duration=" + duration +
+                ", date=" + date +
                 ", url='" + url + '\'' +
-                ", lyricsId='" + lyricsId + '\'' +
+                ", lyricsId=" + lyricsId +
+                ", genreId=" + genreId +
                 '}';
-    }
-
-    @SuppressWarnings("unchecked")
-    public static Audio parse(JSONObject json) {
-        Audio res = new Audio();
-        res.artist = (String) json.get("artist");
-        res.title = (String) json.get("title");
-        res.duration = (Long) json.get("duration");
-        res.url = (String) json.get("url");
-        res.lyricsId = (long) json.getOrDefault("lyrics_id", 0L); // unchecked
-        return res;
     }
 }

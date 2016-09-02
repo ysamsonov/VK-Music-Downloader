@@ -1,18 +1,17 @@
 package me.academeg.api.dao;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import me.academeg.api.VkData;
 import me.academeg.api.dataSet.Audio;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class AudioDao {
 
@@ -24,7 +23,6 @@ public class AudioDao {
 
     public ArrayList<Audio> get(String ownerId, int count, int offset) throws IOException {
         OkHttpClient client = new OkHttpClient();
-
         HttpUrl url = getUrl()
                 .addQueryParameter("owner_id", ownerId)
                 .addQueryParameter("access_token", accessToken)
@@ -32,23 +30,25 @@ public class AudioDao {
                 .addQueryParameter("offset", String.valueOf(offset))
                 .addQueryParameter("v", VkData.API_VER)
                 .build();
-
         Request request = new Request.Builder()
                 .url(url)
                 .get()
                 .build();
 
-        Response response = client.newCall(request).execute();
+        String body;
+        try (Response response = client.newCall(request).execute()) {
+            body = response.body().string();
+        }
 
         ArrayList<Audio> audio = new ArrayList<>();
         try {
-            JSONParser parser = new JSONParser();
-            JSONObject jsonResponse = (JSONObject) ((JSONObject) parser.parse(response.body().string())).get("response");
-            JSONArray array = (JSONArray) jsonResponse.get("items");
-            for (Object anArray : array) {
-                audio.add(Audio.parse((JSONObject) anArray));
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode items = mapper.readTree(body).get("response").get("items");
+            Iterator<JsonNode> elements = items.elements();
+            while (elements.hasNext()) {
+                audio.add(mapper.treeToValue(elements.next(), Audio.class));
             }
-        } catch (ParseException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return audio;

@@ -57,19 +57,6 @@ public class AudioTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-//        try {
-//            JSONParser parser = new JSONParser();
-//            JSONObject object = (JSONObject) parser.parse(json);
-//            Audio audio = Audio.parse(object);
-//            assertEquals(audio.getArtist(), artist);
-//            assertEquals(audio.getTitle(), title);
-//            assertEquals(audio.getDuration(), duration);
-//            assertEquals(audio.getLyricsId(), lyricsId);
-//            assertEquals(audio.getUrl(), url);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Parameterized.Parameters

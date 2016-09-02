@@ -44,13 +44,14 @@ public class Audio {
                 '}';
     }
 
+    @SuppressWarnings("unchecked")
     public static Audio parse(JSONObject json) {
         Audio res = new Audio();
         res.artist = (String) json.get("artist");
         res.title = (String) json.get("title");
         res.duration = (Long) json.get("duration");
         res.url = (String) json.get("url");
-        res.lyricsId = (long) json.getOrDefault("lyrics_id", 0L);
+        res.lyricsId = (long) json.getOrDefault("lyrics_id", 0L); // unchecked
         return res;
     }
 }

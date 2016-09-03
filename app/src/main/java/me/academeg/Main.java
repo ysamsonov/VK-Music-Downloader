@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import me.academeg.api.VkData;
 import me.academeg.ui.controller.AuthController;
 import me.academeg.ui.controller.MusicController;
 import me.academeg.utils.SettingsSaver;

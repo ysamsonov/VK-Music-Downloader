@@ -1,6 +1,6 @@
 package me.academeg.utils;
 
-import me.academeg.api.VkData;
+import me.academeg.VkData;
 
 import java.io.File;
 import java.io.FileInputStream;

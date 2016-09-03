@@ -1,0 +1,9 @@
+group 'me.academeg'
+version '1.0'
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.1'
+}

@@ -1,4 +1,4 @@
-package me.academeg.api;
+package me.academeg;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

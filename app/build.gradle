@@ -1,0 +1,17 @@
+group 'me.academeg'
+version '1.0'
+
+dependencies {
+    compile project(':api')
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'me.academeg.Main'
+    }
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}

@@ -1,9 +1,9 @@
-package me.academeg.api.methods;
+package me.academeg.methods;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import me.academeg.api.VkData;
-import me.academeg.api.model.Audio;
+import me.academeg.VkData;
+import me.academeg.model.Audio;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

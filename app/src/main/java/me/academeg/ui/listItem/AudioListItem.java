@@ -2,7 +2,7 @@ package me.academeg.ui.listItem;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import me.academeg.api.model.Audio;
+import me.academeg.model.Audio;
 
 public class AudioListItem {
 

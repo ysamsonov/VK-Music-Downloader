@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import me.academeg.api.VkData;
+import me.academeg.VkData;
 import me.academeg.utils.SettingsSaver;
 
 import java.io.IOException;

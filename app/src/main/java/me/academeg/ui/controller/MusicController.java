@@ -9,9 +9,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.stage.DirectoryChooser;
-import me.academeg.api.VkData;
-import me.academeg.api.methods.AudioMethods;
-import me.academeg.api.model.Audio;
+import me.academeg.VkData;
+import me.academeg.methods.AudioMethods;
+import me.academeg.model.Audio;
 import me.academeg.loader.DownloadManager;
 import me.academeg.ui.listItem.AudioListItem;
 

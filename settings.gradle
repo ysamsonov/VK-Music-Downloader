@@ -1,2 +1,3 @@
 rootProject.name = 'VK-Music'
 
+include 'api', 'app'

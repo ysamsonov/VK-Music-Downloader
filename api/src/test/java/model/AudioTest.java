@@ -45,15 +45,15 @@ public class AudioTest {
         ObjectMapper mapper = new ObjectMapper();
         try {
             Audio audio = mapper.readValue(json, Audio.class);
-            assertEquals(audio.getId(), id);
-            assertEquals(audio.getOwnerId(), ownerId);
-            assertEquals(audio.getArtist(), artist);
-            assertEquals(audio.getTitle(), title);
-            assertEquals(audio.getDuration(), duration);
-            assertEquals(audio.getDate(), date);
-            assertEquals(audio.getUrl(), url);
-            assertEquals(audio.getLyricsId(), lyricsId);
-            assertEquals(audio.getGenreId(), genreId);
+            assertEquals(id, audio.getId());
+            assertEquals(ownerId, audio.getOwnerId());
+            assertEquals(artist, audio.getArtist());
+            assertEquals(title, audio.getTitle());
+            assertEquals(duration, audio.getDuration());
+            assertEquals(date, audio.getDate());
+            assertEquals(url, audio.getUrl());
+            assertEquals(lyricsId, audio.getLyricsId());
+            assertEquals(genreId, audio.getGenreId());
         } catch (IOException e) {
             e.printStackTrace();
         }

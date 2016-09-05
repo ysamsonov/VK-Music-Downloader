@@ -10,7 +10,7 @@ public class Audio {
     private long id;
     @JsonProperty(value = "owner_id")
     private long ownerId;
-    @JsonProperty(value = "artist", defaultValue = "123", required = true)
+    @JsonProperty(value = "artist")
     private String artist = "";
     private String title = "";
     private long duration;

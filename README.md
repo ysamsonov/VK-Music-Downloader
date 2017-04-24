@@ -1,4 +1,4 @@
-#<img src="app/src/main/resources/icon.png" height="33px" alt="App icon"/> VK-Music-Downloader
+# <img src="app/src/main/resources/icon.png" height="33px" alt="App icon"/> VK-Music-Downloader
 [![GitHub stars](https://img.shields.io/github/stars/jaguar51/VK-Music-Downloader.svg?style=flat-square)](https://github.com/jaguar51/VK-Music-Downloader/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/jaguar51/VK-Music-Downloader.svg?style=flat-square)](https://github.com/jaguar51/VK-Music-Downloader/issues)
 
